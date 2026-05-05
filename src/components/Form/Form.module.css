@@ -2,5 +2,32 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 400px;
+  margin: 60px auto;
+}
+
+.errorState {
+  font-size: 14px;
   color: red;
+  font-weight: bold;
+}
+
+.hobyContainer {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.submitBtn {
+  cursor: pointer;
+  background-color: rgb(27, 206, 27);
+  width: 100px;
+  color: white;
+  margin: 0 auto;
+  font-size: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 300ms ease-in-out;
+  &:hover {
+    background-color: rgb(35, 102, 35);
+  }
 }

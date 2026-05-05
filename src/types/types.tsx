@@ -1,17 +1,16 @@
 type hobbyList =
   | 'skydiving'
   | 'singing'
-  | 'bearDrinking'
   | 'fishing'
   | 'videogaming'
   | 'working out'
   | 'traveling'
   | 'reading'
   | 'studying'
-  | ' learning lenguages'
-  | 'other'
+  | 'learning lenguages'
   | 'taking photos'
-  | 'dansing';
+  | 'dansing'
+  | 'other';
 export interface User {
   name: string;
   surname: string;
@@ -22,8 +21,8 @@ export interface User {
   country: string;
   city: string;
   postalCode: number;
-  birthDate: Date;
-  sex: 'male' | 'female';
+  birthDate: Date | string;
+  sex: 'male' | 'female' | 'other';
   hobbies: hobbyList[];
   personality: string;
   isConfirmRules: boolean;
