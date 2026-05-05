@@ -2,8 +2,6 @@ import { Field, Formik, ErrorMessage, Form, type FormikHelpers } from 'formik';
 import type { User } from '../../types/types';
 import * as yup from 'yup';
 import css from './Form.module.css';
-import { isValidElement } from 'react';
-
 const initialValues: User = {
   name: '',
   surname: '',
