@@ -7,9 +7,9 @@ type hobbyList =
   | 'traveling'
   | 'reading'
   | 'studying'
-  | 'learning lenguages'
+  | 'learning languages'
   | 'taking photos'
-  | 'dansing'
+  | 'dancing'
   | 'other';
 export interface User {
   name: string;
@@ -20,7 +20,7 @@ export interface User {
   phone: string;
   country: string;
   city: string;
-  postalCode: number;
+  postalCode: string;
   birthDate: Date | string;
   sex: 'male' | 'female' | 'other';
   hobbies: hobbyList[];

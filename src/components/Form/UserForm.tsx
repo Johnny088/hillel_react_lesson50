@@ -1,7 +1,7 @@
 import { Field, Formik, ErrorMessage, Form, type FormikHelpers } from 'formik';
 import type { User } from '../../types/types';
 import * as yup from 'yup';
-import css from './Form.module.css';
+import css from './UserForm.module.css';
 const initialValues: User = {
   name: '',
   surname: '',
@@ -9,14 +9,14 @@ const initialValues: User = {
   phone: '',
   country: '',
   city: '',
-  postalCode: 0,
+  postalCode: '',
   birthDate: new Date().toISOString().split('T')[0],
   sex: 'male',
   hobbies: [],
   personality: '',
   password: '',
   confirmPassword: '',
-  isConfirmRules: true,
+  isConfirmRules: false,
 };
 
 const phonePattern = /^\+380\d{9}$/;
@@ -45,7 +45,6 @@ const userSchema = yup.object().shape({
   confirmPassword: yup
     .string()
     .required(isRequired)
-    .min(8, 'the password should contain minimum 8 characters')
     .oneOf([yup.ref('password')], 'password must match'),
   country: yup
     .string()
@@ -56,8 +55,29 @@ const userSchema = yup.object().shape({
     .number()
     .required(isRequired)
     .min(100, 'postal code contains at least 3 numbers'),
+
   birthDate: yup.date().required(isRequired),
-  hobbies: yup.array().length(2, 'you should choose at least two hobbies'),
+  hobbies: yup
+    .array()
+    .min(2, 'you should choose at least two hobbies')
+    .of(
+      yup
+        .string()
+        .oneOf([
+          'skydiving',
+          'singing',
+          'fishing',
+          'videogaming',
+          'working out',
+          'traveling',
+          'reading',
+          'studying',
+          'learning languages',
+          'taking photos',
+          'dancing',
+          'other',
+        ]),
+    ),
   personality: yup
     .string()
     .max(300, 'length has to be not more than 300 symbols'),
@@ -201,7 +221,7 @@ export const UsersForm = () => {
             <label>
               <Field
                 type="checkbox"
-                value="learning lenguages"
+                value="learning languages"
                 name="hobbies"
               />
               learning lenguages
@@ -211,7 +231,7 @@ export const UsersForm = () => {
               taking photos
             </label>
             <label>
-              <Field type="checkbox" value="dansing" name="hobbies" />
+              <Field type="checkbox" value="dancing" name="hobbies" />
               dansing
             </label>
             <label>
