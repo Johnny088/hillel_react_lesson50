@@ -21,6 +21,7 @@ const initialValues: User = {
 
 const phonePattern = /^\+380\d{9}$/;
 const passwordPattern = /(?=.*\d+).{8,}/;
+const postalCodePattern = /^\d{3,10}$/;
 const isRequired = 'this field is required';
 
 const userSchema = yup.object().shape({
@@ -52,9 +53,12 @@ const userSchema = yup.object().shape({
     .min(4, 'any country has at least 4 letters'),
   city: yup.string().required('this field is required').min(2, 'min 2 letters'),
   postalCode: yup
-    .number()
+    .string()
     .required(isRequired)
-    .min(100, 'postal code contains at least 3 numbers'),
+    .matches(
+      postalCodePattern,
+      'postal code contains at least 3 numbers and not more than 10 numbers',
+    ),
 
   birthDate: yup.date().required(isRequired),
   hobbies: yup
@@ -224,7 +228,7 @@ export const UsersForm = () => {
                 value="learning languages"
                 name="hobbies"
               />
-              learning lenguages
+              learning languages
             </label>
             <label>
               <Field type="checkbox" value="taking photos" name="hobbies" />
@@ -232,7 +236,7 @@ export const UsersForm = () => {
             </label>
             <label>
               <Field type="checkbox" value="dancing" name="hobbies" />
-              dansing
+              dancing
             </label>
             <label>
               <Field type="checkbox" value="other" name="hobbies" />
